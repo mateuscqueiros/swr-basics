@@ -7,11 +7,10 @@ import {
 } from "./features/products";
 
 function App() {
-  const { data, isLoading, error } = useProducts();
-  const { trigger: createProduct } = useCreateProduct();
-  const { trigger: updateProduct } = useUpdateProduct(1);
-  const { trigger: deleteProduct } = useDeleteProduct(1);
-  const products = data && data.products;
+  const { products, isLoading, error } = useProducts();
+  const { createProduct } = useCreateProduct();
+  const { updateProduct } = useUpdateProduct(1);
+  const { deleteProduct } = useDeleteProduct(1);
 
   if (isLoading) return <>Carregando...</>;
   if (error) return <>Houve um erro</>;
