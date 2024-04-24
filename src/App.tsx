@@ -11,6 +11,7 @@ function App() {
   const { createProduct } = useCreateProduct();
   const { updateProduct } = useUpdateProduct(1);
   const { deleteProduct } = useDeleteProduct(1);
+  console.log(products && products.products);
 
   if (isLoading) return <>Carregando...</>;
   if (error) return <>Houve um erro</>;
@@ -38,7 +39,8 @@ function App() {
       >
         Delete Product
       </button>
-      {products && products.map((p: any) => <p key={p.id}>{p.title}</p>)}
+      {products.products &&
+        products.products.map((p: any) => <p key={p.id}>{p.title}</p>)}
     </div>
   );
 }

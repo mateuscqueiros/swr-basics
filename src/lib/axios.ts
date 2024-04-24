@@ -1,9 +1,7 @@
 import Axios from 'axios';
 
 export type ProductMutationType = {
-  arg: {
-    title: string
-  }
+  title: string
 }
 
 export const axios = Axios.create({
@@ -18,12 +16,12 @@ export async function axiosGet(url: string) {
   return axios.get(url).then((response) => response.data);
 }
 
-export async function axiosPost(url: string, { arg }: ProductMutationType) {
-  return axios.post(url, arg).then((response) => response.data);
+export async function axiosPost(url: string, data?: ProductMutationType, params?: any) {
+  return axios.post(url, data, params).then((response) => response.data);
 }
 
-export async function axiosPut(url: string, { arg }: ProductMutationType) {
-  return axios.put(url, arg).then((response) => response.data);
+export async function axiosPut(url: string, data?: ProductMutationType, params?: any) {
+  return axios.put(url, data, params).then((response) => response.data);
 }
 
 export async function axiosDelete(url: string) {

@@ -12,7 +12,7 @@ export function useProducts() {
 }
 
 export function useCreateProduct() {
-  const { trigger, ...rest } = useSWRMutation(`/products/add`, axiosPost)
+  const { trigger, ...rest } = useSWRMutation(`/products`, (_, data) => axiosPost(`/products/add`, data.arg))
 
   return {
     createProduct: trigger,
@@ -21,7 +21,10 @@ export function useCreateProduct() {
 }
 
 export function useUpdateProduct(id: number) {
-  const { trigger, ...rest } = useSWRMutation(`/products/${id}`, axiosPut)
+  const { trigger, ...rest } = useSWRMutation(`/products`, (_, data) => {
+    console.log(data.arg)
+    return axiosPut(`/products/${id}`, data.arg, { id })
+  })
 
   return {
     updateProduct: trigger,
@@ -30,7 +33,7 @@ export function useUpdateProduct(id: number) {
 }
 
 export function useDeleteProduct(id: number) {
-  const { trigger, ...rest } = useSWRMutation(`/products/${id}`, axiosDelete)
+  const { trigger, ...rest } = useSWRMutation(`/products`, (_) => axiosDelete(`/products/${id}`))
 
   return {
     deleteProduct: trigger,
